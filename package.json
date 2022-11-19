@@ -21,6 +21,7 @@
     "execa": "^5.1.0",
     "graceful-fs": "^4.2.10",
     "listr2": "^5.0.5",
+    "minimist": "^1.2.7",
     "vk-io": "^4.7.0"
   },
   "devDependencies": {
