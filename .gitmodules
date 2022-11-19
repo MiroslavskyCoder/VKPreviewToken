@@ -1,0 +1,3 @@
+[submodule "deps/app"]
+	path = deps/app
+	url = https://github.com/MiroslavskyCoder/VKPreviewTokenDepsApp
