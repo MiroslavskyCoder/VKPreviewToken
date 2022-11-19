@@ -1,5 +1,8 @@
 const electron = require("electron");
 const path = require("path");
+const minimist = require("minimist");
+
+console.log(minimist(process.argv, { "--": true }));
 
 if (typeof(electron) == "string") {
     process.exit(-1);
@@ -21,8 +24,14 @@ function create() {
         },
         backgroundColor: "#121212",
         center: true,
-        frame: false
+        titleBarStyle: 'hidden',
+        titleBarOverlay: { 
+            symbolColor: '#fff',
+            height: 40
+        },
+        transparent: true
     }); 
+    
     win.webContents.openDevTools();
     win.loadFile(path.resolve(__dirname, "..", "deps/app/build/index.html"));
 
@@ -44,6 +53,6 @@ app.whenReady().then(() => {
   
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit()
+        app.quit();
     }
 });
