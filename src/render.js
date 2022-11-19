@@ -1,21 +1,11 @@
 const electron = require("electron"); 
+const minimist = require("minimist");
 
 const _parseArgs = () => {
-    return {
-        dev: process.argv.indexOf("--dev") != -1
-    }
+    return minimist(process.argv, { "--": true });
 }
 
-electron.contextBridge.exposeInMainWorld("VKPreviewToken", {
-    createSession(...args) {
-        return electron.ipcRenderer.invoke("create-session", ...args);
-    },
-    listSavesSessions(...args) {
-        return electron.ipcRenderer.invoke("list-saves-sessions", ...args);
-    },
-    isActiveSession(...args) {
-        return electron.ipcRenderer.invoke("is-active-session", ...args);
-    },
+window.VKPreviewToken = { 
     versions: {
         node: () => process.versions.node,
         chrome: () => process.versions.chrome,
@@ -31,6 +21,8 @@ electron.contextBridge.exposeInMainWorld("VKPreviewToken", {
         return _parseArgs();
     },
     isDev() {
-        return _parseArgs()["dev"];
-    }
-});
+        return _parseArgs()["dev"] || false;
+    },
+    require,
+    process
+};

@@ -11,6 +11,32 @@ const {
     ipcMain
 } = electron;
 
+/**
+ * @type {import("electron").BrowserWindow}
+ */
+let main = null;
+
+function toggleDevTools() {
+    if (!main.webContents.isDevToolsOpened()) {
+        main.webContents.openDevTools();
+    } else {
+        main.webContents.closeDevTools();
+    }
+}
+
+const _webPreferences = {
+    blinkFeatures: "EnumerateDevices,AudioOutputDevices",
+    nodeIntegration: false, 
+    nativeWindowOpen: true,
+    enableRemoteModule: false,
+    spellcheck: true,
+    contextIsolation: true, 
+    additionalArguments: [
+        "--enable-node-leakage-in-renderers"
+    ],
+    nodeIntegration: true
+}
+
 function create() {
     const loading = new BrowserWindow({ 
         center: true,
@@ -19,9 +45,7 @@ function create() {
         height: 512,
         minHeight: 512,
         minWidth: 512,
-        webPreferences: {
-            contextIsolation: true
-        },
+        webPreferences: _webPreferences,
         titleBarStyle: "hidden", 
         resizable: false
     });
@@ -30,14 +54,14 @@ function create() {
     loading.show(); 
      
     loading.on("ready-to-show", () => {
-        const main = new BrowserWindow({
+        main = new BrowserWindow({
             width: 1000,
             height: 600,
             minWidth: 1000,
             minHeight: 600,
             webPreferences: {
-                preload: path.join(__dirname, "render.js"),
-                contextIsolation: true
+                preload: path.resolve(__dirname, "render.js"),
+                ..._webPreferences
             },
             backgroundColor: "#121212",
             center: true,
@@ -55,7 +79,13 @@ function create() {
             loading.hide();
             loading.close();
 
-            main.show(); 
+            main.show();  
+            
+            main.webContents.on("before-input-event", (event, input) => {
+                if (input.key == "F12") {
+                    toggleDevTools();
+                }
+            });
 
             ipcMain.handle("create-session", async (event, ...args) => {
                 console.log(args);
@@ -73,6 +103,8 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
             create();
+        } else {
+            app.show();
         }
     })
 });
