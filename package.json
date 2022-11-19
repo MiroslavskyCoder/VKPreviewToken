@@ -1,7 +1,7 @@
 {
-  "name": "vkpreviewtoken",
+  "name": "VKPreviewToken",
   "version": "1.0.0",
-  "description": "",
+  "description": "VKPreviewToken App",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-builder start",
@@ -11,7 +11,7 @@
     "build:linux": "electron-builder build --linux"
   },
   "author": {
-    "name": "MiroslavskyCoder",
+    "name": "byMiroslavsky",
     "email": "programmer_js@vk.com"
   },
   "license": "ISC",
@@ -27,7 +27,8 @@
   "devDependencies": {
     "@electron/asar": "^3.2.2",
     "electron": "^21.3.0",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^23.6.0",
+    "electron-builder-squirrel-windows": "^24.0.0-alpha.3"
   },
   "repository": {
     "type": "git",
@@ -43,11 +44,27 @@
       "deps/app/build"
     ],
     "win": {
-      "icon": "./assets/icons/logo.ico"
+      "target": [
+        {
+          "target": "squirrel"
+        },
+        {
+          "target": "appx"
+        }
+      ],
+      "icon": "./assets/icons/logo.ico" 
+    },
+    "squirrelWindows": {
+      "loadingGif": "assets/loading_squirrel.gif", 
+      "useAppIdAsId": true,
+      "msi": true
+    },
+    "appx": {
+      "backgroundColor": "#121212"
     },
     "directories": {
       "buildResources": "assets",
-      "output": "release/build"
+      "output": "build"
     },
     "asar": true,
     "publish": [
