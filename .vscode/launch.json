@@ -1,0 +1,24 @@
+{ 
+    "version": "0.2.0",
+    "configurations": [  
+        {
+            "command": "npm run build",
+            "name": "Build App",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "name": "Launch App",
+            "request": "launch",
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        }
+    ]
+}
