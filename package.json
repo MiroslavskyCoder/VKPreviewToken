@@ -1,6 +1,6 @@
 {
   "name": "VKPreviewToken",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "VKPreviewToken App",
   "main": "src/index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "execa": "^5.1.0",
     "graceful-fs": "^4.2.10",
     "listr2": "^5.0.5",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.7",
     "vk-io": "^4.7.0"
   },
@@ -41,7 +42,8 @@
     "files": [
       "assets",
       "src",
-      "deps/app/build"
+      "deps/app/build",
+      "package.json"
     ],
     "win": {
       "target": [
@@ -52,10 +54,10 @@
           "target": "appx"
         }
       ],
-      "icon": "./assets/icons/logo.ico" 
+      "icon": "./assets/icons/logo.ico"
     },
     "squirrelWindows": {
-      "loadingGif": "assets/loading_squirrel.gif", 
+      "loadingGif": "assets/loading_squirrel.gif",
       "useAppIdAsId": true,
       "msi": true
     },
