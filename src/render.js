@@ -1,4 +1,7 @@
 const electron = require("electron");  
+const minimist = require("minimist");
+
+const _parseArgs = () => minimist(process.argv, { "--": true });
 
 electron.contextBridge.exposeInMainWorld("VKPreviewToken", {
     createSession(...args) {
@@ -21,7 +24,10 @@ electron.contextBridge.exposeInMainWorld("VKPreviewToken", {
     hide() {
         electron.app.hide();
     },
+    parseArgs() { 
+        return _parseArgs();
+    },
     isDev() {
-        return process.argv.includes("--dev");
+        return _parseArgs()["dev"];
     }
 });
