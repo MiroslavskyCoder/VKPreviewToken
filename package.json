@@ -1,0 +1,21 @@
+{
+  "name": "vktoken",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "env-paths": "^2.2.1",
+    "execa": "^5.1.0",
+    "graceful-fs": "^4.2.10",
+    "listr2": "^5.0.5",
+    "vk-io": "^4.7.0"
+  },
+  "devDependencies": {
+    "electron": "^21.3.0"
+  }
+}
