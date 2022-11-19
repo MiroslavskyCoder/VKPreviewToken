@@ -7,7 +7,21 @@ electron.contextBridge.exposeInMainWorld("VKPreviewToken", {
     listSavesSessions(...args) {
         return electron.ipcRenderer.invoke("list-saves-sessions", ...args);
     },
-    node: () => process.versions.node,
-    chrome: () => process.versions.chrome,
-    electron: () => process.versions.electron,
+    isActiveSession(...args) {
+        return electron.ipcRenderer.invoke("is-active-session", ...args);
+    },
+    versions: {
+        node: () => process.versions.node,
+        chrome: () => process.versions.chrome,
+        electron: () => process.versions.electron,
+    },
+    exit(code = 0) {
+        electron.app.exit(code);
+    },
+    hide() {
+        electron.app.hide();
+    },
+    isDev() {
+        return process.argv.includes("--dev");
+    }
 });

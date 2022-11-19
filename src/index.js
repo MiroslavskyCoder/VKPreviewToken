@@ -13,12 +13,15 @@ const {
 
 function create() {
     const win = new BrowserWindow({
-        width: 800,
+        width: 1000,
         height: 600,
         webPreferences: {
             preload: path.join(__dirname, "render.js"),
             contextIsolation: true
-        }
+        },
+        backgroundColor: "#121212",
+        center: true,
+        frame: false
     }); 
     win.webContents.openDevTools();
     win.loadFile(path.resolve(__dirname, "..", "deps/app/build/index.html"));
