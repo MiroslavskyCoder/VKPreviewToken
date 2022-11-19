@@ -38,7 +38,8 @@
     "copyright": "Copyright © 2022 ${author}",
     "files": [
       "assets",
-      "src"
+      "src",
+      "deps/app/build"
     ],
     "win": {
       "icon": "./assets/icons/logo.ico"
