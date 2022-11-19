@@ -1,10 +1,14 @@
 {
-  "name": "vktoken",
+  "name": "vkpreviewtoken",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "electron ./src/index.js"
+    "start": "electron-builder start",
+    "build": "electron-builder build",
+    "build:win": "electron-builder build --win",
+    "build:mac": "electron-builder build --mac",
+    "build:linux": "electron-builder build --linux"
   },
   "author": {
     "name": "MiroslavskyCoder",
@@ -20,7 +24,13 @@
     "vk-io": "^4.7.0"
   },
   "devDependencies": {
-    "electron": "^21.3.0"
+    "@electron/asar": "^3.2.2",
+    "electron": "^21.3.0",
+    "electron-builder": "^23.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MiroslavskyCoder/VKPreviewToken.git"
   },
   "build": {
     "appId": "ru.bymiroslavsky.vkpreviewtoken",
@@ -31,12 +41,19 @@
       "src"
     ],
     "win": {
-      "icon": "./assets/icons/logo.png"
+      "icon": "./assets/icons/logo.ico"
     },
     "directories": {
       "buildResources": "assets",
       "output": "release/build"
     },
-    "asar": true
+    "asar": true,
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "MiroslavskyCoder",
+        "repo": "VKPreviewToken"
+      }
+    ]
   }
 }
